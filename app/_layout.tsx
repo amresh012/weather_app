@@ -5,6 +5,6 @@ import store  from "@/store/store";
 export default function RootLayout() {
 
   return  <Provider store={store}>
-    <Stack screenOptions={{ headerShown: false }} />;
+    <Stack screenOptions={{ headerShown: false }} />
   </Provider>
 }
