@@ -3,8 +3,12 @@
     "name": "weather_app",
     "slug": "weather_app",
     "version": "1.0.0",
+    
     "orientation": "portrait",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "icon": "./assets/images/sun.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
@@ -13,9 +17,12 @@
       "supportsTablet": true
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/58913523-4866-48c2-a7d5-d75b69a8f53f"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/sun.png",
@@ -39,8 +46,19 @@
         }
       ]
     ],
+    
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "58913523-4866-48c2-a7d5-d75b69a8f53f"
+      }
+    },
+    "owner": "amresh012",
+    
   }
 }

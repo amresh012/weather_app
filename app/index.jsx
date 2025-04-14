@@ -32,7 +32,6 @@ export default function Index() {
 
   const { loading, weather, forcast, error } = useSelector((state) => state.weather);
   const { current, location } = weather || {};
-  console.log(weather, forcast)
   const handleSearch = (term) => {
     if (!term?.name) return;
     setCity(term.name);
