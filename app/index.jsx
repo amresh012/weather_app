@@ -20,6 +20,8 @@ import { useOfflineStatus } from "../hooks/useOfline";
 import { useRouter } from "expo-router";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWeather, fetchForecast } from "@/Slice/weather";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export default function Index() {
   const router = useRouter();
@@ -44,9 +46,41 @@ export default function Index() {
     );
   };
 
+  // caching city data to show offline
+  const saveRecentCity = async (cityName, weather) => {
+    try {
+      const existing = await AsyncStorage.getItem("recentCities");
+      const parsed = existing ? JSON.parse(existing) : [];
+  
+      const newCity = {
+        name: cityName,
+        localtime: weather?.location?.localtime,
+        temp_c: weather?.current?.temp_c,
+        temp_f: weather?.current?.temp_f,
+        condition: weather?.current?.condition,
+      };
+  
+      const updated = [newCity, ...parsed.filter((c) => c.name !== cityName)];
+  
+      const trimmed = updated.slice(0, 5);
+  
+      await AsyncStorage.setItem("recentCities", JSON.stringify(trimmed));
+    } catch (err) {
+      console.log("Error saving recent city:", err);
+    }
+  };
+  
+  useEffect(() => {
+    if (weather && !loading && !error) {
+      saveRecentCity(city, weather);
+    }
+  }, [weather]);
+  
+
   useEffect(() => {
     dispatch(fetchWeather(city));
     dispatch(fetchForecast({ city, days: day }));
+    
   }, [city, day]);
 
   return (
@@ -66,6 +100,7 @@ export default function Index() {
           }
         >
           <View className="w-full h-full p-2 flex-1 justify-start items-center gap-4">
+            {isOffline && <Text>You are offline!</Text>}
             {!isOffline && <SearchBar onSearch={handleSearch} />}
             {isOffline && <WeatherScreen />}
 

@@ -3,7 +3,6 @@
     "name": "weather_app",
     "slug": "weather_app",
     "version": "1.0.0",
-    
     "orientation": "portrait",
     "platforms": [
       "ios",
@@ -14,7 +13,14 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "ios",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "infoPlist": {
+    "NSMicrophoneUsageDescription": "This app uses your microphone for voice search."
+  }
+      }
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -26,8 +32,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/sun.png",
-        "backgroundColor": "#000"
-      }
+        "backgroundColor": "#000000"
+      },
+      "package": "com.amresh012.weather_app"
     },
     "web": {
       "bundler": "metro",
@@ -42,11 +49,10 @@
           "image": "./assets/images/sun.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#000"
+          "backgroundColor": "#000000"
         }
       ]
     ],
-    
     "experiments": {
       "typedRoutes": true
     },
@@ -59,6 +65,8 @@
       }
     },
     "owner": "amresh012",
-    
+    "runtimeVersion": {
+      "policy": "appVersion"
+    }
   }
 }

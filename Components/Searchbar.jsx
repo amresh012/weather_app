@@ -1,6 +1,13 @@
-import { View, Text, TextInput, TouchableOpacity, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, { useState } from "react";
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline";
+import VoiceSearchButton from "@/Components/VoiceSearch"
 
 export default function Searchbar({ onSearch }) {
   const [search, setSearch] = useState("");
@@ -60,12 +67,13 @@ export default function Searchbar({ onSearch }) {
               <MagnifyingGlassIcon color="white" size={25} />
             </TouchableOpacity>
           </View>
+          <VoiceSearchButton  onSearch={handleSearch}/>
         </View>
         {loading && <ActivityIndicator size="large" color="#fff" />}
-        {error  && <Text>{error.message}</Text>}
-        {results &&  (
+        {error && <Text>{error.message}</Text>}
+        {results && (
           <View className="p-2  mt-2">
-            { results.map((result, index) => (
+            {results.map((result, index) => (
               <TouchableOpacity
                 key={index}
                 onPress={() => handleSelect(result)}
@@ -74,9 +82,10 @@ export default function Searchbar({ onSearch }) {
                 <Text className="text-white">
                   {result.name} , {result && result.country}
                 </Text>
-                <Text className="text-xs text-white italic">Region : {result?.region}</Text>
+                <Text className="text-xs text-white italic">
+                  Region : {result?.region}
+                </Text>
               </TouchableOpacity>
-              
             ))}
           </View>
         )}
